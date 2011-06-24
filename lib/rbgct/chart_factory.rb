@@ -1,5 +1,5 @@
 module Rbgct
-  
+
   class ChartFactory
     def self.[](type)
       case type

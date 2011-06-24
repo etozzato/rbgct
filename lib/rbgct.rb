@@ -4,7 +4,6 @@ module Rbgct
   require 'rbgct/charts/chart'
   require 'rbgct/charts/line_chart'
 
-
   class NotImplementedError < StandardError; end
 
   def self.render(data, opts={})

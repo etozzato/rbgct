@@ -47,7 +47,7 @@ module Rbgct::Charts
       end
 
       def max_value
-        @max_value ||= data.map(&:value).flatten.max
+        @max_value ||= data.map(&:"#{opts[:y_method]}").flatten.max
       end
 
     end
