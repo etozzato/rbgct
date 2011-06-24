@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Emanuele Tozzato"]
   s.email       = ["etozzato@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = ["http://mekdigital.com"]
   s.summary     = %q{Ruby Google Chart Tools}
   s.description = %q{Google Chart Tools provide a perfect way to visualize data on your website: now on Ruby}
 
