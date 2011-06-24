@@ -1,16 +1,15 @@
 module Rbgct
 
-  require './rbgct/chart_factory.rb'
-  Dir.glob('./rbgct/charts/*.rb').each{|file| require file }
+  require 'rbgct/chart_factory'
+  require 'rbgct/charts/chart'
+  require 'rbgct/charts/line_chart'
+
 
   class NotImplementedError < StandardError; end
 
   def self.render(data, opts={})
-    chart = ChartFactory[opts[:type]]
-    chart.render(data, opts)
+    chart = ChartFactory[opts[:type]].new(data,opts)
+    chart.render
   end
-  
-end
 
-Rbgct.render({},{:type => :line_chart})
-# Rbgct.render({},{})
+end
