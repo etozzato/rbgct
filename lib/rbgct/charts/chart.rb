@@ -1,8 +1,12 @@
 module Rbgct::Charts
 
     module Chart
+      
+      DEFAULT_WIDTH  = 600
+      DEFAULT_HEIGHT = 400
 
-      attr_accessor :max_value
+      attr_accessor :data, :type
+      attr_accessor :width, :height
 
       def jsapi
         <<-EOL
@@ -28,26 +32,31 @@ module Rbgct::Charts
   // Create and draw the visualization.
   new google.visualization.LineChart(document.getElementById('visualization')).
     draw(data, {curveType: "function",
-      width: 1000, height: 400,
+      width: #{width}, height: #{height},
       vAxis: {maxValue: #{max_value}}}
     );
   }
 
   google.setOnLoadCallback(drawVisualization);
 </script>
-<div id="visualization" style="width: 1000px; height: 400px;"></div>
+<div id="visualization" style="width: #{width}px; height: #{height}px;"></div>
         EOL
       end
 
       def package
-        case self.opts[:type]
+        case type
         when :line_chart
           'corechart'
         end
       end
 
       def max_value
-        @max_value ||= data.map(&:"#{opts[:y_method]}").flatten.max
+        @max_value ||= data.map(&:"#{y_method}").flatten.max
+      end
+      
+      def set_default_values
+        @width  ||= DEFAULT_WIDTH
+        @height ||= DEFAULT_HEIGHT
       end
 
     end

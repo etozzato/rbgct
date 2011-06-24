@@ -12,7 +12,7 @@ fantasy_data = (0..100).to_a.map {|i| SampleData.new((Time.now + 60*5*i).strftim
 
 Rbgct.render(fantasy_data,{ :type     => :line_chart, 
 							:x_method => :date, 
-							:y_method => :value,
+							:y_method => :values,
 							:x_label  => :time,
 							:y_label  => :transactions})
 </pre>

@@ -3,11 +3,15 @@ module Rbgct::Charts
     class LineChart
 
       include Chart
-      attr_accessor :data, :opts
+
+      attr_accessor :x_label, :x_method, :y_label, :y_method
+      attr_accessor :max_value
 
       def initialize(data, opts)
         @data = data
-        @opts = opts
+        opts.each{ |method,arg| self.send("#{method}=",arg) if self.respond_to?(method)}
+        opts[:chart_options].each{ |method,arg| self.send("#{method}=",arg) if self.respond_to?(method)}
+        set_default_values # in Chart
       end
 
       def render
@@ -21,13 +25,13 @@ module Rbgct::Charts
       end
 
       def data_columns
-        "data.addColumn('string', '#{opts[:x_label]}');\n" +
-        Array(opts[:y_label]).map{|lbl| %(data.addColumn('number', '#{lbl}');)}.join("\n")
+        "data.addColumn('string', '#{x_label}');\n" +
+        Array(y_label).map{|lbl| %(data.addColumn('number', '#{lbl}');)}.join("\n")
       end
 
       def data_rows
         data.map do |row|
-          %(data.addRow(['#{row.send(opts[:x_method])}', #{Array(row.send(opts[:y_method])).join(",")}]);)
+          %(data.addRow(['#{row.send(x_method)}', #{Array(row.send(y_method)).join(",")}]);)
         end.join("\n")
       end
     end
