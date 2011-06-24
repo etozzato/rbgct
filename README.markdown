@@ -144,3 +144,6 @@ Rbgct.render(fantasy_data,{ :type     => :line_chart,
 </script>
 <div id="visualization" style="width: 1000px; height: 400px;"></div>
 </pre>
+
+## Line Chart in Google Beauty
+![Line Graph](https://github.com/etozzato/rbgct/raw/master/docs/example.png "Title")
