@@ -146,4 +146,4 @@ Rbgct.render(fantasy_data,{ :type     => :line_chart,
 </pre>
 
 ## Line Chart in Google Beauty
-![Line Graph](https://github.com/etozzato/rbgct/raw/master/docs/example.png "Title")
+![Line Graph](http://mekdigital.com/files/rbgct_example.png "Title")
