@@ -9,8 +9,12 @@ module Rbgct::Charts
 
       def initialize(data, opts)
         @data = data
+
         opts.each{ |method,arg| self.send("#{method}=",arg) if self.respond_to?(method)}
         opts[:chart_options].each{ |method,arg| self.send("#{method}=",arg) if self.respond_to?(method)}
+
+        @max_value = data.map(&:"#{y_method}").flatten.max
+
         set_default_values # in Chart
       end
 

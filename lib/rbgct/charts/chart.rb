@@ -50,13 +50,9 @@ module Rbgct::Charts
         end
       end
 
-      def max_value
-        @max_value ||= data.map(&:"#{y_method}").flatten.max
-      end
-      
       def set_default_values
-        @width  ||= DEFAULT_WIDTH
-        @height ||= DEFAULT_HEIGHT
+        @width     ||= DEFAULT_WIDTH
+        @height    ||= DEFAULT_HEIGHT
       end
 
     end
