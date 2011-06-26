@@ -10,139 +10,145 @@ $ gem install rbgct
 SampleData = Struct.new(:date, :values)
 fantasy_data = (0..100).to_a.map {|i| SampleData.new((Time.now + 60*5*i).strftime("%H:%M"), rand(500)) }
 
-Rbgct.render(fantasy_data,{ :type     => :line_chart, 
-							:x_method => :date, 
-							:y_method => :values,
-							:x_label  => :time,
-							:y_label  => :transactions})
+Rbgct.render(fantasy_data,{
+	:type     => :line_chart, 
+	:x_method => :date, 
+	:y_method => :values,
+	:x_label  => :time,
+	:y_label  => :transactions,
+	:chart_options =>{
+	  :width => 1600,
+	  :height => 600,
+	  :dom_id => 'transactions_linechart',
+	  :curve_type => 'function'
+}})
 </pre>
 
 ## Line Chart output in HTML
 <pre>
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript">
-	google.load('visualization', '1', {packages: ['corechart']});
-</script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+	  google.load('visualization', '1', {packages: ['corechart']});
+	</script>
 
-<script type="text/javascript">
-	function drawVisualization() {
-	// Create and populate the data table.
-		var data = new google.visualization.DataTable();
-		data.addColumn('string', 'time');
-		data.addColumn('number', 'transactions');
-		data.addRow(['01:00', 7]);
-		data.addRow(['01:05', 314]);
-		data.addRow(['01:10', 267]);
-		data.addRow(['01:15', 39]);
-		data.addRow(['01:20', 240]);
-		data.addRow(['01:25', 461]);
-		data.addRow(['01:30', 86]);
-		data.addRow(['01:35', 336]);
-		data.addRow(['01:40', 486]);
-		data.addRow(['01:45', 170]);
-		data.addRow(['01:50', 191]);
-		data.addRow(['01:55', 252]);
-		data.addRow(['02:00', 375]);
-		data.addRow(['02:05', 432]);
-		data.addRow(['02:10', 106]);
-		data.addRow(['02:15', 495]);
-		data.addRow(['02:20', 226]);
-		data.addRow(['02:25', 255]);
-		data.addRow(['02:30', 20]);
-		data.addRow(['02:35', 335]);
-		data.addRow(['02:40', 116]);
-		data.addRow(['02:45', 125]);
-		data.addRow(['02:50', 53]);
-		data.addRow(['02:55', 341]);
-		data.addRow(['03:00', 189]);
-		data.addRow(['03:05', 303]);
-		data.addRow(['03:10', 156]);
-		data.addRow(['03:15', 388]);
-		data.addRow(['03:20', 228]);
-		data.addRow(['03:25', 291]);
-		data.addRow(['03:30', 173]);
-		data.addRow(['03:35', 456]);
-		data.addRow(['03:40', 203]);
-		data.addRow(['03:45', 186]);
-		data.addRow(['03:50', 7]);
-		data.addRow(['03:55', 49]);
-		data.addRow(['04:00', 444]);
-		data.addRow(['04:05', 12]);
-		data.addRow(['04:10', 37]);
-		data.addRow(['04:15', 490]);
-		data.addRow(['04:20', 2]);
-		data.addRow(['04:25', 155]);
-		data.addRow(['04:30', 50]);
-		data.addRow(['04:35', 235]);
-		data.addRow(['04:40', 412]);
-		data.addRow(['04:45', 167]);
-		data.addRow(['04:50', 89]);
-		data.addRow(['04:55', 488]);
-		data.addRow(['05:00', 74]);
-		data.addRow(['05:05', 353]);
-		data.addRow(['05:10', 262]);
-		data.addRow(['05:15', 89]);
-		data.addRow(['05:20', 374]);
-		data.addRow(['05:25', 296]);
-		data.addRow(['05:30', 275]);
-		data.addRow(['05:35', 105]);
-		data.addRow(['05:40', 70]);
-		data.addRow(['05:45', 409]);
-		data.addRow(['05:50', 429]);
-		data.addRow(['05:55', 445]);
-		data.addRow(['06:00', 38]);
-		data.addRow(['06:05', 125]);
-		data.addRow(['06:10', 340]);
-		data.addRow(['06:15', 425]);
-		data.addRow(['06:20', 189]);
-		data.addRow(['06:25', 357]);
-		data.addRow(['06:30', 220]);
-		data.addRow(['06:35', 69]);
-		data.addRow(['06:40', 344]);
-		data.addRow(['06:45', 292]);
-		data.addRow(['06:50', 243]);
-		data.addRow(['06:55', 287]);
-		data.addRow(['07:00', 162]);
-		data.addRow(['07:05', 116]);
-		data.addRow(['07:10', 174]);
-		data.addRow(['07:15', 187]);
-		data.addRow(['07:20', 227]);
-		data.addRow(['07:25', 425]);
-		data.addRow(['07:30', 376]);
-		data.addRow(['07:35', 387]);
-		data.addRow(['07:40', 210]);
-		data.addRow(['07:45', 136]);
-		data.addRow(['07:50', 202]);
-		data.addRow(['07:55', 471]);
-		data.addRow(['08:00', 313]);
-		data.addRow(['08:05', 63]);
-		data.addRow(['08:10', 326]);
-		data.addRow(['08:15', 482]);
-		data.addRow(['08:20', 190]);
-		data.addRow(['08:25', 183]);
-		data.addRow(['08:30', 434]);
-		data.addRow(['08:35', 242]);
-		data.addRow(['08:40', 257]);
-		data.addRow(['08:45', 42]);
-		data.addRow(['08:50', 279]);
-		data.addRow(['08:55', 223]);
-		data.addRow(['09:00', 103]);
-		data.addRow(['09:05', 447]);
-		data.addRow(['09:10', 41]);
-		data.addRow(['09:15', 325]);
-		data.addRow(['09:20', 327]);
+	<script type="text/javascript">
+	  function drawVisualization() {
+	    // Create and populate the data table.
+	    var data = new google.visualization.DataTable();
 
-	// Create and draw the visualization.
-	new google.visualization.LineChart(document.getElementById('visualization')).
-	  draw(data, {curveType: "function",
-	    width: 1000, height: 400,
-	    vAxis: {maxValue: 495}}
-	  );
-	}
+	data.addColumn('string', 'time');
+	data.addColumn('number', 'transactions');
+	data.addRow(['10:58', 184]);
+	data.addRow(['11:03', 380]);
+	data.addRow(['11:08', 231]);
+	data.addRow(['11:13', 133]);
+	data.addRow(['11:18', 282]);
+	data.addRow(['11:23', 99]);
+	data.addRow(['11:28', 86]);
+	data.addRow(['11:33', 50]);
+	data.addRow(['11:38', 144]);
+	data.addRow(['11:43', 399]);
+	data.addRow(['11:48', 38]);
+	data.addRow(['11:53', 466]);
+	data.addRow(['11:58', 402]);
+	data.addRow(['12:03', 365]);
+	data.addRow(['12:08', 408]);
+	data.addRow(['12:13', 436]);
+	data.addRow(['12:18', 248]);
+	data.addRow(['12:23', 156]);
+	data.addRow(['12:28', 109]);
+	data.addRow(['12:33', 272]);
+	data.addRow(['12:38', 290]);
+	data.addRow(['12:43', 465]);
+	data.addRow(['12:48', 301]);
+	data.addRow(['12:53', 171]);
+	data.addRow(['12:58', 223]);
+	data.addRow(['13:03', 157]);
+	data.addRow(['13:08', 139]);
+	data.addRow(['13:13', 115]);
+	data.addRow(['13:18', 205]);
+	data.addRow(['13:23', 314]);
+	data.addRow(['13:28', 443]);
+	data.addRow(['13:33', 428]);
+	data.addRow(['13:38', 462]);
+	data.addRow(['13:43', 347]);
+	data.addRow(['13:48', 291]);
+	data.addRow(['13:53', 69]);
+	data.addRow(['13:58', 383]);
+	data.addRow(['14:03', 84]);
+	data.addRow(['14:08', 247]);
+	data.addRow(['14:13', 73]);
+	data.addRow(['14:18', 9]);
+	data.addRow(['14:23', 120]);
+	data.addRow(['14:28', 17]);
+	data.addRow(['14:33', 441]);
+	data.addRow(['14:38', 161]);
+	data.addRow(['14:43', 154]);
+	data.addRow(['14:48', 281]);
+	data.addRow(['14:53', 498]);
+	data.addRow(['14:58', 363]);
+	data.addRow(['15:03', 11]);
+	data.addRow(['15:08', 99]);
+	data.addRow(['15:13', 84]);
+	data.addRow(['15:18', 460]);
+	data.addRow(['15:23', 350]);
+	data.addRow(['15:28', 204]);
+	data.addRow(['15:33', 177]);
+	data.addRow(['15:38', 174]);
+	data.addRow(['15:43', 200]);
+	data.addRow(['15:48', 111]);
+	data.addRow(['15:53', 293]);
+	data.addRow(['15:58', 112]);
+	data.addRow(['16:03', 274]);
+	data.addRow(['16:08', 43]);
+	data.addRow(['16:13', 324]);
+	data.addRow(['16:18', 190]);
+	data.addRow(['16:23', 371]);
+	data.addRow(['16:28', 455]);
+	data.addRow(['16:33', 63]);
+	data.addRow(['16:38', 432]);
+	data.addRow(['16:43', 63]);
+	data.addRow(['16:48', 17]);
+	data.addRow(['16:53', 377]);
+	data.addRow(['16:58', 176]);
+	data.addRow(['17:03', 211]);
+	data.addRow(['17:08', 105]);
+	data.addRow(['17:13', 18]);
+	data.addRow(['17:18', 46]);
+	data.addRow(['17:23', 368]);
+	data.addRow(['17:28', 171]);
+	data.addRow(['17:33', 404]);
+	data.addRow(['17:38', 82]);
+	data.addRow(['17:43', 417]);
+	data.addRow(['17:48', 13]);
+	data.addRow(['17:53', 189]);
+	data.addRow(['17:58', 216]);
+	data.addRow(['18:03', 259]);
+	data.addRow(['18:08', 4]);
+	data.addRow(['18:13', 4]);
+	data.addRow(['18:18', 339]);
+	data.addRow(['18:23', 5]);
+	data.addRow(['18:28', 194]);
+	data.addRow(['18:33', 127]);
+	data.addRow(['18:38', 247]);
+	data.addRow(['18:43', 42]);
+	data.addRow(['18:48', 29]);
+	data.addRow(['18:53', 357]);
+	data.addRow(['18:58', 65]);
+	data.addRow(['19:03', 300]);
+	data.addRow(['19:08', 355]);
+	data.addRow(['19:13', 58]);
+	data.addRow(['19:18', 58]);
 
-	google.setOnLoadCallback(drawVisualization);
-</script>
-<div id="visualization" style="width: 1000px; height: 400px;"></div>
+	  // Create and draw the visualization.
+	  new google.visualization.LineChart(document.getElementById('transactions_linechart')).
+	    draw(data, {width: 1600, height: 600 , vAxis: {maxValue: 498}, curveType: "function"});
+	  }
+
+	  google.setOnLoadCallback(drawVisualization);
+	</script>
+	<div id="transactions_linechart" style="width: 1600px; height: 600px;"></div>
+
 </pre>
 
 ## Line Chart in Google Beauty
