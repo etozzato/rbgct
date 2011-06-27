@@ -6,7 +6,7 @@ module Rbgct::Charts
       DEFAULT_HEIGHT = 400
 
       attr_accessor :data, :type
-      attr_accessor :width, :height, :dom_id
+      attr_accessor :width, :height, :dom_id, :title, :h_title, :v_title, :top, :left, :legend, :x_strftime, :y_strftime
 
       def jsapi
         <<-EOL
@@ -31,7 +31,7 @@ module Rbgct::Charts
 
   // Create and draw the visualization.
   new google.visualization.LineChart(document.getElementById('#{dom_id}')).
-    draw(data, {width: #{width}, height: #{height} #{options_for_chart}});
+    draw(data, {width: #{width}, height: #{height}, chartArea: {top: #{top}, left: #{left}} #{options_for_chart}});
   }
 
   google.setOnLoadCallback(drawVisualization);
@@ -51,6 +51,8 @@ module Rbgct::Charts
         @dom_id    ||= 'visualization'
         @width     ||= DEFAULT_WIDTH
         @height    ||= DEFAULT_HEIGHT
+        @top       ||= 'auto'
+        @left      ||= 'auto'
       end
 
     end

@@ -40,12 +40,28 @@ module Rbgct::Charts
 
       def data_rows
         data.map do |row|
-          %(data.addRow(['#{row.send(x_method)}', #{Array(row.send(y_method)).join(",")}]);)
+          %(data.addRow(['#{eval_x_strftime(row.send(x_method))}', #{Array(eval_y_strftime(row.send(y_method))).join(",")}]);)
         end.join("\n")
       end
 
       def options_for_chart
-        ", vAxis: {maxValue: #{max_value}}, curveType: \"#{curve_type}\""
+        %(, vAxis: {maxValue: #{max_value}, title: "#{v_title}"}, hAxis: {title: "#{h_title}"}, curveType: "#{curve_type}")
+      end
+
+      def eval_x_strftime(val)
+        if respond_to?(:x_strftime) && x_strftime && val.respond_to?(:strftime)
+          val.send(:strftime, x_strftime)
+        else
+          val
+        end
+      end
+
+      def eval_y_strftime(val)
+        if respond_to?(:y_strftime) && y_strftime && val.respond_to?(:strftime)
+          val.send(:strftime, y_strftime)
+        else
+          val
+        end
       end
 
       def set_default_values_line_chart
