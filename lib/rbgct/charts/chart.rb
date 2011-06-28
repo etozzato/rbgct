@@ -31,7 +31,7 @@ module Rbgct::Charts
 
   // Create and draw the visualization.
   new google.visualization.LineChart(document.getElementById('#{dom_id}')).
-    draw(data, {width: #{width}, height: #{height}, chartArea: {top: #{top}, left: #{left}} #{options_for_chart}});
+    draw(data, {width: #{width}, height: #{height}, title: "#{title}", chartArea: {top: #{top}, left: #{left}} #{options_for_chart}});
   }
 
   google.setOnLoadCallback(drawVisualization);

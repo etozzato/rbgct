@@ -45,7 +45,7 @@ module Rbgct::Charts
       end
 
       def options_for_chart
-        %(, vAxis: {maxValue: #{max_value}, title: "#{v_title}"}, hAxis: {title: "#{h_title}"}, curveType: "#{curve_type}")
+        %(, curveType: "#{curve_type}", vAxis: {maxValue: #{max_value}, title: "#{v_title}"}, hAxis: {title: "#{h_title}"})
       end
 
       def eval_x_strftime(val)
