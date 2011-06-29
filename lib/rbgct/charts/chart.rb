@@ -6,7 +6,7 @@ module Rbgct::Charts
       DEFAULT_HEIGHT = 400
 
       attr_accessor :data, :type
-      attr_accessor :width, :height, :dom_id, :title, :h_title, :v_title, :top, :left, :legend, :x_strftime, :y_strftime
+      attr_accessor :width, :height, :dom_id, :title, :h_title, :v_title, :top, :left, :legend, :x_strftime, :y_strftime, :time_offset
 
       def jsapi
         <<-EOL

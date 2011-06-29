@@ -49,8 +49,8 @@ module Rbgct::Charts
       end
 
       def eval_x_strftime(val)
-        if respond_to?(:x_strftime) && x_strftime && val.respond_to?(:strftime)
-          val.send(:strftime, x_strftime)
+        if val.respond_to?(:strftime)
+          respond_to?(:x_strftime) && x_strftime ? val.getlocal(time_offset).send(:strftime, x_strftime) : val.getlocal(time_offset)
         else
           val
         end
