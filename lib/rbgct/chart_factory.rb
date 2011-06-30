@@ -5,6 +5,8 @@ module Rbgct
       case type
       when :line_chart
         Charts::LineChart
+      when :pie_chart
+        Charts::PieChart
       else
         raise NotImplementedError, "No ChartFactory class for type #{type || 'NULL'}"
       end

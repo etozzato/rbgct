@@ -23,16 +23,6 @@ module Rbgct::Charts
         set_default_values_line_chart
       end
 
-      def render
-        <<-EOL
-#{jsapi}
-#{draw_visualization_start}
-#{data_columns}
-#{data_rows}
-#{draw_visualization_end}
-        EOL
-      end
-
       def data_columns
         "data.addColumn('string', '#{x_label}');\n" +
         Array(y_label).map{|lbl| %(data.addColumn('number', '#{lbl}');)}.join("\n")
