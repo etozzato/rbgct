@@ -9,7 +9,6 @@ module Rbgct::Charts
 
       def initialize(data, opts)
         raise ArgumentError.new('x_method or y_method are not defined') unless opts[:x_method] && opts[:y_method]
-        raise ArgumentError.new('dataset is not an Array') unless data.is_a?(Array)
 
         @data = data
 

@@ -8,6 +8,7 @@ module Rbgct
   class NotImplementedError < StandardError; end
 
   def self.render(data, opts={})
+    raise ArgumentError.new('Dataset must respond to :each') unless data.respond_to?(:each)
     chart = ChartFactory[opts[:type]].new(data,opts)
     chart.render
   end

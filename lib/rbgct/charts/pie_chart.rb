@@ -8,7 +8,6 @@ module Rbgct::Charts
 
     def initialize(data, opts)
       raise ArgumentError.new('name or value are not defined') unless opts[:name] && opts[:value]
-      raise ArgumentError.new('dataset is not an Array') unless data.is_a?(Array)
 
       @data = data
 
