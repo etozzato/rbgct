@@ -70,6 +70,7 @@ module Rbgct::Charts
         @top                  ||= 100
         @left                 ||= 100
         @class_name           ||= self.class.name.sub('Rbgct::Charts::','')
+        @bg_color             ||= '#ffffff'
         @bg_stroke_color      ||= '#ffffff'
         @bg_stroke            ||= 0
       end
