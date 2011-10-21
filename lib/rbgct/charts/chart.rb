@@ -6,7 +6,7 @@ module Rbgct::Charts
       DEFAULT_HEIGHT = 400
 
       attr_accessor :data, :type, :class_name, :render_warning
-      attr_accessor :width, :height, :dom_id, :title, :h_title, :v_title, :top, :left, :legend, :x_strftime, :y_strftime, :time_offset
+      attr_accessor :width, :height, :dom_id, :title, :h_title, :v_title, :top, :left, :legend, :x_strftime, :y_strftime, :time_offset, :bg_color, :bg_stroke, :bg_stroke_color
 
       def render
         if data.empty?
@@ -44,7 +44,7 @@ module Rbgct::Charts
 
   // Create and draw the visualization.
   new google.visualization.#{class_name}(document.getElementById('#{dom_id}')).
-    draw(data, {width: #{width}, height: #{height}, title: "#{title}", chartArea: {top: #{top}, left: #{left}} #{options_for_chart}});
+    draw(data, {width: #{width}, height: #{height}, backgroundColor:{stroke:'#{bg_stroke_color}', strokeWidth:#{bg_stroke}, fill:'#{bg_color}'}, title: "#{title}", chartArea: {top: #{top}, left: #{left}} #{options_for_chart}});
   }
 
   google.setOnLoadCallback(drawVisualization);
@@ -70,6 +70,8 @@ module Rbgct::Charts
         @top                  ||= 100
         @left                 ||= 100
         @class_name           ||= self.class.name.sub('Rbgct::Charts::','')
+        @bg_stroke_color      ||= '#ffffff'
+        @bg_stroke            ||= 0
       end
 
     end
