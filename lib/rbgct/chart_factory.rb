@@ -7,6 +7,8 @@ module Rbgct
         Charts::LineChart
       when :pie_chart
         Charts::PieChart
+      when :bar_chart
+        Charts::BarChart
       else
         raise NotImplementedError, "No ChartFactory class for type #{type || 'NULL'}"
       end

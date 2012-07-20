@@ -4,6 +4,7 @@ module Rbgct
   require 'rbgct/charts/chart'
   require 'rbgct/charts/line_chart'
   require 'rbgct/charts/pie_chart'
+  require 'rbgct/charts/bar_chart'
 
   class NotImplementedError < StandardError; end
 
