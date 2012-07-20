@@ -8,6 +8,15 @@ module Rbgct
 
   class NotImplementedError < StandardError; end
 
+  def self.include_javascript(package='corechart')
+  <<-EOL
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+  google.load('visualization', '1', {packages: ['#{package}']});
+  </script>
+  EOL
+  end
+
   def self.render(data, opts={})
     raise ArgumentError.new('Dataset must respond to :each') unless data.respond_to?(:each)
     chart = ChartFactory[opts[:type]].new(data,opts)

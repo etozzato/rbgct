@@ -1,7 +1,7 @@
 module Rbgct::Charts
 
     module Chart
-      
+
       DEFAULT_WIDTH  = 600
       DEFAULT_HEIGHT = 400
 
@@ -13,14 +13,13 @@ module Rbgct::Charts
           return render_warning ? "<span class='rbgct-no-data'>Dataset <em>#{title}<em> contains no data.</span>" : nil
         end
         <<-EOL
-      #{jsapi}
       #{draw_visualization_start}
       #{data_columns}
       #{data_rows}
       #{draw_visualization_end}
         EOL
       end
-            
+
       def jsapi
         <<-EOL
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -55,9 +54,7 @@ module Rbgct::Charts
 
       def package
         case type
-        when :line_chart
-          'corechart'
-        when :pie_chart
+        when :line_chart, :bar_chart, :pie_chart
           'corechart'
         end
       end
