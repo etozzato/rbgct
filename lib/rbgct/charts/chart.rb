@@ -20,35 +20,28 @@ module Rbgct::Charts
         EOL
       end
 
-      def jsapi
-        <<-EOL
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript">
-  google.load('visualization', '1', {packages: ['#{package}']});
-</script>
-        EOL
-      end
-
       def draw_visualization_start
         <<-EOL
+<div id="#{dom_id}" style="width: #{width}px; height: #{height}px;"></div>        
 <script type="text/javascript">
-  function drawVisualization() {
-    // Create and populate the data table.
-    var data = new google.visualization.DataTable();
+  rbgct.graphs['#{dom_id}'] = (function() {
+    
+    if(document.getElementById('#{dom_id}')){
+      // Create and populate the data table.
+      var data = new google.visualization.DataTable();
         EOL
       end
 
       def draw_visualization_end
         <<-EOL
 
-  // Create and draw the visualization.
-  new google.visualization.#{class_name}(document.getElementById('#{dom_id}')).
-    draw(data, {width: #{width}, height: #{height}, backgroundColor:{stroke:'#{bg_stroke_color}', strokeWidth:#{bg_stroke}, fill:'#{bg_color}'}, title: "#{title}", chartArea: {top: #{top}, left: #{left}} #{options_for_chart}});
-  }
-
-  google.setOnLoadCallback(drawVisualization);
+      // Create and draw the visualization.
+      new google.visualization.#{class_name}(document.getElementById('#{dom_id}')).
+        draw(data, {width: #{width}, height: #{height}, backgroundColor:{stroke:'#{bg_stroke_color}', strokeWidth:#{bg_stroke}, fill:'#{bg_color}'}, title: "#{title}", chartArea: {top: #{top}, left: #{left}} #{options_for_chart}});
+    }
+  })  
+  rbgct.drawGraphs();
 </script>
-<div id="#{dom_id}" style="width: #{width}px; height: #{height}px;"></div>
         EOL
       end
 

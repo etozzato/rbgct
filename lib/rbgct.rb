@@ -8,11 +8,35 @@ module Rbgct
 
   class NotImplementedError < StandardError; end
 
-  def self.include_javascript(package='corechart')
+  def self.include_javascript(packages=['corechart','table'])
   <<-EOL
   <script type="text/javascript" src="http://www.google.com/jsapi"></script>
   <script type="text/javascript">
-  google.load('visualization', '1', {packages: ['#{package}']});
+  var rbgct = {
+    
+    "graphs" : {},
+        
+    "loadedPackages" : [],
+    
+    "packages" : ['#{packages.join("\',\'")}'],
+    
+    "drawGraphs"  : (function(){
+        for(var i in rbgct.graphs){
+          rbgct.graphs[i]();
+        }
+    }),
+    
+    "loadPackages" : (function(){
+      for(var i in rbgct.packages){
+        if( rbgct.loadedPackages.indexOf(rbgct.packages[i]) == -1 ){
+          google.load('visualization', '1', {packages: [rbgct.packages[i]]}); 
+          rbgct.loadedPackages.push(rbgct.packages[i]); 
+        }
+      }
+      google.setOnLoadCallback(rbgct.drawGraphs)
+    })
+  };
+  rbgct.loadPackages();
   </script>
   EOL
   end
