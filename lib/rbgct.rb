@@ -13,19 +13,19 @@ module Rbgct
   <script type="text/javascript" src="http://www.google.com/jsapi"></script>
   <script type="text/javascript">
   var rbgct = {
-    
+
     "graphs" : {},
-        
+
     "loadedPackages" : [],
-    
+
     "packages" : ['#{packages.join("\',\'")}'],
-    
+
     "drawGraphs"  : (function(){
         for(var i in rbgct.graphs){
           rbgct.graphs[i]();
         }
     }),
-    
+
     "loadPackages" : (function(){
       for(var i in rbgct.packages){
         if( rbgct.loadedPackages.indexOf(rbgct.packages[i]) == -1 ){
