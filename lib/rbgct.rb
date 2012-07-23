@@ -28,7 +28,6 @@ module Rbgct
     
     "loadPackages" : (function(){
       for(var i in rbgct.packages){
-        console.log(rbgct.packages[i])
         if( rbgct.loadedPackages.indexOf(rbgct.packages[i]) == -1 ){
           google.load('visualization', '1', {packages: [rbgct.packages[i]]}); 
           rbgct.loadedPackages.push(rbgct.packages[i]); 
