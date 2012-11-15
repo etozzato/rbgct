@@ -10,7 +10,7 @@ module Rbgct
 
   def self.include_javascript(packages=['corechart','table'])
   <<-EOL
-  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="//www.google.com/jsapi"></script>
   <script type="text/javascript">
   var rbgct = {
 
